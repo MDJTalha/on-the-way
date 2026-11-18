@@ -6,9 +6,9 @@ type RideType = "car" | "bike" | "rickshaw";
 type RideOption = { id: RideType; name: string; detail: string; eta: string; fare: number; icon: string };
 
 const rides: RideOption[] = [
-  { id: "car", name: "Standard car", detail: "Up to 4 seats · 2 bags", eta: "4 min away", fare: 2.4, icon: "🚘" },
-  { id: "bike", name: "Bike", detail: "1 passenger · light luggage", eta: "2 min away", fare: 1.1, icon: "🏍️" },
-  { id: "rickshaw", name: "Rickshaw", detail: "Up to 3 passengers", eta: "6 min away", fare: 1.6, icon: "🛺" },
+  { id: "car", name: "Standard car", detail: "Up to 4 seats · 2 bags", eta: "Sample only", fare: 2.4, icon: "🚘" },
+  { id: "bike", name: "Bike", detail: "1 passenger · light luggage", eta: "Sample only", fare: 1.1, icon: "🏍️" },
+  { id: "rickshaw", name: "Rickshaw", detail: "Up to 3 passengers", eta: "Sample only", fare: 1.6, icon: "🛺" },
 ];
 
 const money = (value: number) => value.toFixed(2);
@@ -47,7 +47,7 @@ export default function Home() {
           ))}
         </nav>
         <div className="header-actions">
-          <span className="network-pill"><i /> Testnet preview</span>
+          <span className="network-pill"><i /> Prototype - no live network</span>
           <button className="language-button" aria-label="Language">EN <span>⌄</span></button>
           <button className="sign-in" onClick={() => setNotice("Pi authentication will be enabled after Testnet app credentials are configured.")}>Sign in with Pi <span className="pi-dot">π</span></button>
           <button className="menu-button" aria-label="Open menu">☰</button>
@@ -94,7 +94,7 @@ export default function Home() {
             </div>
             {scheduled && <div className="schedule-row"><label>Date and time <input type="datetime-local" /></label></div>}
             <div className="divider" />
-            <div className="vehicle-heading"><span className="step-label">02 / CHOOSE YOUR RIDE</span><span className="muted-small">Available nearby</span></div>
+            <div className="vehicle-heading"><span className="step-label">02 / CHOOSE YOUR RIDE</span><span className="muted-small">Illustrative options</span></div>
             <div className="ride-options">
               {rides.map((ride) => (
                 <button key={ride.id} onClick={() => { setRideType(ride.id); setOffer(ride.fare); }} className={rideType === ride.id ? "ride-option selected" : "ride-option"}>
@@ -118,7 +118,7 @@ export default function Home() {
                 <div className="range-labels"><span>Lower offer</span><span>Higher offer</span></div>
               </div>
             ) : (
-              <div className="fare-summary"><span>Estimated trip fare</span><strong>π {money(selectedRide.fare)}</strong><small>Final price confirmed with your driver</small></div>
+              <div className="fare-summary"><span>Illustrative fare - not a quote</span><strong>π {money(selectedRide.fare)}</strong><small>Sample value only - final quote requires live pricing</small></div>
             )}
             <button className="request-button" onClick={requestRide}>Find a {selectedRide.name.toLowerCase()} <span>→</span></button>
             {notice && <div className="notice" role="status">{notice}<button onClick={() => setNotice("")} aria-label="Dismiss">×</button></div>}
@@ -152,14 +152,14 @@ export default function Home() {
           </div>
           <div className="map-foot">
             <div className="coverage-icon">⌖</div>
-            <div><strong>Starting in your city</strong><small>Local availability will appear when a launch zone is configured.</small></div>
+            <div><strong>Launch city not configured</strong><small>Live driver availability will appear after a city pilot is configured.</small></div>
             <span className="coming-soon">PILOT READYING</span>
           </div>
         </div>
       </section>
 
       <section className="bottom-strip">
-        <div><span className="strip-icon">01</span><span><strong>Choose with confidence</strong><small>Compare available drivers and fares.</small></span></div>
+        <div><span className="strip-icon">01</span><span><strong>Choose with confidence</strong><small>Compare vehicle categories and sample fares.</small></span></div>
         <div><span className="strip-icon">02</span><span><strong>Pay with purpose</strong><small>Pi-first payments, verified securely.</small></span></div>
         <div><span className="strip-icon">03</span><span><strong>Built to go further</strong><small>Mobility today. More everyday services next.</small></span></div>
       </section>

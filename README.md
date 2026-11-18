@@ -11,6 +11,7 @@ Pi Mobility is a Pi Browser-first, global mobility marketplace concept. The firs
 - [x] Private GitHub repository created
 - [x] Next.js + TypeScript foundation
 - [x] Responsive customer booking experience (interactive preview)
+- [x] UI/UX specification and truthful preview-state labeling
 - [x] Ride category selection and fare-mode interaction
 - [ ] Pi SDK authentication (requires Pi Developer Portal app credentials)
 - [ ] Pi Platform API payment lifecycle (requires Testnet credentials)
@@ -57,5 +58,6 @@ Copy `.env.example` to `.env.local`. Never commit secrets. The Pi API key is ser
 
 - [Product specification](docs/product-specification.md)
 - [Architecture](docs/architecture.md)
+- [UI/UX specification](docs/ui-ux-specification.md)
 - [Hackathon plan](docs/hackathon-plan.md)
 - [Delivery roadmap](docs/implementation-roadmap.md)
