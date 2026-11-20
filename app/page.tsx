@@ -38,7 +38,7 @@ export default function Home() {
     <main className="app-shell">
       <header className="topbar">
         <a className="brand" href="#" aria-label="On the Way home">
-          <span className="brand-mark">P<span>i</span></span>
+          <span className="brand-mark">O<span>W</span></span>
           <span className="brand-name">on the way</span>
         </a>
         <nav className="main-nav" aria-label="Main navigation">
@@ -165,7 +165,7 @@ export default function Home() {
       </section>
 
       <footer className="footer">
-        <div className="footer-brand"><span className="brand-mark small">P<span>i</span></span> mobility</div>
+        <div className="footer-brand"><span className="brand-mark small">O<span>W</span></span> on the way</div>
         <span>Independent project · Not affiliated with or endorsed by Pi Network.</span>
         <span>© 2026 On the Way · Preview 0.1.0</span>
       </footer>
