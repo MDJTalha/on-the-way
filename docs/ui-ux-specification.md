@@ -6,7 +6,7 @@ Deliver a calm, premium mobility interface that is immediately understandable in
 
 ## Design direction
 
-- Brand: Pi Mobility — “Move Freely. Pay with Pi.”
+- Brand: On the Way — “Move Freely. Pay with Pi.”
 - Visual character: confident, clean, practical, human and globally usable.
 - Palette: deep evergreen/charcoal for structure, restrained lime accent for primary actions, warm off-white surfaces, muted neutral text.
 - Typography: high-legibility sans serif with clear hierarchy; avoid decorative display treatments in operational screens.

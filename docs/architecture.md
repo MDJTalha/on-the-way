@@ -1,4 +1,4 @@
-# Architecture — Pi Mobility
+# Architecture — On the Way
 
 ## 1. Architecture decision
 

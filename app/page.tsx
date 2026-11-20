@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <main className="app-shell">
       <header className="topbar">
-        <a className="brand" href="#" aria-label="Pi Mobility home">
+        <a className="brand" href="#" aria-label="On the Way home">
           <span className="brand-mark">P<span>i</span></span>
-          <span className="brand-name">mobility</span>
+          <span className="brand-name">on the way</span>
         </a>
         <nav className="main-nav" aria-label="Main navigation">
           {["Ride", "Drive", "Business"].map((item) => (
@@ -167,7 +167,7 @@ export default function Home() {
       <footer className="footer">
         <div className="footer-brand"><span className="brand-mark small">P<span>i</span></span> mobility</div>
         <span>Independent project · Not affiliated with or endorsed by Pi Network.</span>
-        <span>© 2026 Pi Mobility · Preview 0.1.0</span>
+        <span>© 2026 On the Way · Preview 0.1.0</span>
       </footer>
     </main>
   );

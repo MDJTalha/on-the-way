@@ -2,7 +2,7 @@
 
 ## Project submission concept
 
-**Global Pi Mobility — Real-world mobility, powered by Pi.**
+**Global On the Way — Real-world mobility, powered by Pi.**
 
 A Pi Browser application where a Pioneer can authenticate, request a ride, compare driver offers, follow the trip lifecycle and complete a Pi Testnet payment verified by the backend.
 

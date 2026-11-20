@@ -1,12 +1,12 @@
-# Product Specification — Pi Mobility
+# Product Specification — On the Way
 
 ## 1. Product definition
 
-Pi Mobility is an independent, global mobility marketplace designed first for Pi Browser. It connects passengers with independent drivers and fleet operators. Pi is the primary payment ecosystem, subject to Pi Platform capabilities, regional law and production approval.
+On the Way is an independent, global mobility marketplace designed first for Pi Browser. It connects passengers with independent drivers and fleet operators. Pi is the primary payment ecosystem, subject to Pi Platform capabilities, regional law and production approval.
 
 **Positioning:** Move Freely. Pay with Pi.
 
-**Non-affiliation:** Pi Mobility is an independent project and must not imply endorsement, ownership or operation by Pi Network.
+**Non-affiliation:** On the Way is an independent project and must not imply endorsement, ownership or operation by Pi Network.
 
 ## 2. MVP objectives
 
@@ -58,7 +58,7 @@ Freight, food, grocery and retail are future product modules and are excluded fr
 
 ## 5. Customer workflow
 
-1. Open Pi Mobility in Pi Browser.
+1. Open On the Way in Pi Browser.
 2. Authenticate with Pi.
 3. Select Ride.
 4. Set pickup and destination.

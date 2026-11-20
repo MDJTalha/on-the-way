@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pi Mobility — Move Freely. Pay with Pi.",
-  description: "A Pi-powered mobility marketplace connecting passengers and independent drivers.",
-  applicationName: "Pi Mobility",
+  title: "On the Way — Move Freely. Pay with Pi.",
+  description: "An independent, Pi-first mobility marketplace connecting passengers with local drivers.",
+  applicationName: "On the Way",
   icons: { icon: "/favicon.svg" },
 };
 
