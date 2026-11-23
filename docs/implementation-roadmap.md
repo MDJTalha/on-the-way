@@ -381,3 +381,7 @@ Not certified:
 - No secure vehicle document onboarding, vehicle approval UI, active pilot service zone or actual driver dispatch exists yet; online activation is therefore expected to remain blocked.
 - CI has not run on GitHub. No commit or deployment has been performed.
 - Additional authorization test: a correctly signed short-lived passenger session without a driver role received HTTP 403 on both availability GET and PATCH; a signed session for a non-existent account received HTTP 403 on driver application submission. The temporary test script was removed; no user or driver records were created.
+
+- Isolated positive-path integration test completed against a disposable PostgreSQL/PostGIS database with migrations 001–007: passenger application (201), operator review (200), operator verification (200), online attempt correctly blocked without verified vehicle/zone (409), online transition after verified vehicle + matching active service zone (200), offline transition (200), and city-change reverification reset to pending/offline with online re-entry blocked (409).
+- The test verified one `application_submitted`, one `review_started`, one `application_verified` and two `availability_changed` audit events. It used short-lived HMAC-signed test sessions and synthetic fixture accounts, not a real Pioneer account.
+- The disposable acceptance database and temporary test script were removed after the test. The primary `on_the_way` database was checked afterward and remained accessible.
