@@ -135,3 +135,302 @@ h3{font-family:Manrope,sans-serif;font-size:17px;letter-spacing:-.5px;margin:7px
 @media(max-width:1000px){.app-shell{padding:0 28px}.workspace{grid-template-columns:minmax(340px,.95fr) minmax(350px,1.05fr);gap:22px}.topbar{gap:28px}.header-actions{gap:12px}.hero-note{max-width:250px}}
 @media(max-width:760px){.app-shell{padding:0 18px}.topbar{height:70px;gap:14px}.brand{font-size:19px}.brand-mark{width:33px;height:33px}.main-nav{display:none}.header-actions{gap:10px}.network-pill,.language-button{display:none}.sign-in{padding:10px 12px;font-size:10px}.menu-button{display:block}.hero{padding:43px 0 28px;display:block}.hero-note{margin-top:24px;width:max-content;max-width:100%}h1{font-size:54px;letter-spacing:-3px}.hero-trust{gap:13px;flex-wrap:wrap}.hero-trust span{font-size:10px}.workspace{grid-template-columns:1fr;gap:20px}.map-column{grid-row:1}.map-panel{height:330px}.booking-card{padding:18px}.bottom-strip{grid-template-columns:1fr;gap:15px;margin-top:15px}.footer{flex-wrap:wrap;gap:10px}.footer>span{width:100%}}
 @media(max-width:390px){.app-shell{padding:0 12px}.sign-in{font-size:0;gap:0}.sign-in .pi-dot{font-size:17px}.hero-trust{gap:9px}.hero-trust span{font-size:9px}.map-panel{height:285px}.booking-card{padding:15px}.ride-option{gap:7px;padding:9px 7px}.ride-info small{font-size:8px}.ride-price small{font-size:8px}}
+
+/* Driver and operator portal foundations */
+.portal-shell{max-width:1280px;margin:0 auto;padding:0 48px}
+.portal-header{height:82px;display:flex;align-items:center;border-bottom:1px solid var(--line);gap:54px}
+.portal-nav{display:flex;gap:28px;margin-left:20px}
+.portal-nav a{font-size:12px;color:#7b8580;text-decoration:none;font-weight:700;padding:31px 0;position:relative}
+.portal-nav a.active{color:var(--ink)}
+.portal-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--green-dark)}
+.portal-state{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:1px;color:#778477;font-weight:800;background:#f1f5ec;padding:9px 11px;border-radius:20px}
+.portal-state i{width:6px;height:6px;border-radius:50%;background:#b0b9aa}
+.portal-hero{padding:65px 0 48px;display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end}
+.portal-hero h1{margin-bottom:15px}
+.portal-lead{max-width:540px;font-size:16px;line-height:1.7;color:#77827a;margin:0}
+.portal-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.portal-tags span{font-size:10px;color:#607047;background:#f0f5e8;border:1px solid #e6edd9;border-radius:20px;padding:8px 11px}
+.portal-callout{background:#f3f7eb;border:1px solid #e4ecd5;border-radius:14px;padding:25px;max-width:380px;justify-self:end}
+.callout-symbol{width:38px;height:38px;border-radius:11px;background:#e0ecc8;color:#63831e;display:grid;place-items:center;font-size:21px;margin-bottom:20px}
+.portal-callout strong{display:block;font-family:Manrope,sans-serif;font-size:15px}
+.portal-callout p{font-size:11px;line-height:1.7;color:#778477;margin:9px 0 0}
+.driver-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:start}
+.portal-panel,.driver-requirements{background:#fff;border:1px solid #e8ede7;border-radius:14px;padding:27px;box-shadow:var(--shadow)}
+.panel-heading h2,.driver-requirements h2,.access-band h2{font-family:Manrope,sans-serif;font-size:25px;letter-spacing:-1px;margin:8px 0}
+.panel-heading p,.access-band p{font-size:11px;color:#879188;line-height:1.7;margin:0}
+.driver-form{display:grid;gap:17px;margin-top:24px}
+.driver-form>label:not(.consent-row){display:grid;gap:7px;font-size:10px;font-weight:700;color:#58645b}
+.driver-form input:not([type=checkbox]){height:44px;border:1px solid #e5eae3;border-radius:7px;padding:0 12px;outline:none;color:var(--ink);font-size:12px;background:#fff}
+.driver-form input:focus{border-color:#a8c66d;box-shadow:0 0 0 3px #a8c66d22}
+.driver-form fieldset{border:0;padding:0;margin:0}
+.driver-form legend{font-size:10px;font-weight:700;color:#58645b;margin-bottom:9px}
+.vehicle-choice{display:flex;gap:8px;flex-wrap:wrap}
+.vehicle-chip{border:1px solid #e7ece5;background:#fafbf9;border-radius:8px;padding:11px 14px;font-size:12px;color:#59645b}
+.vehicle-chip.selected{border-color:#c9dca5;background:#f3f8e9;color:#526f1a}
+.consent-row{display:flex;align-items:flex-start;gap:9px;font-size:10px;line-height:1.6;color:#788278}
+.consent-row input{accent-color:#789e22;margin-top:2px}
+.driver-form .request-button{margin-top:0}
+.driver-requirements h2{margin-bottom:20px}
+.driver-requirements ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.driver-requirements li{padding:15px 0;border-bottom:1px solid #edf0ec;display:grid;gap:5px}
+.driver-requirements li b{font-size:11px}
+.driver-requirements li span{font-size:10px;color:#879188;line-height:1.6}
+.requirement-note{margin-top:18px;padding:12px;background:#f7f8f5;border-radius:7px;color:#788278;font-size:10px;line-height:1.6}
+.draft-confirmation{padding:35px 5px;text-align:center}
+.draft-confirmation>span{width:42px;height:42px;border-radius:50%;background:#eff5e5;color:#678d1b;display:grid;place-items:center;margin:0 auto 15px;font-size:20px}
+.draft-confirmation h3{font-family:Manrope,sans-serif;font-size:20px;margin:0}
+.draft-confirmation p{max-width:380px;margin:9px auto 18px;font-size:11px;line-height:1.7;color:#7b867d}
+.draft-confirmation button{border:1px solid #dfe7d6;background:#fff;border-radius:7px;padding:10px 15px;font-size:11px;color:#5c742b}
+.business-section{padding:12px 0 45px}
+.capability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:23px}
+.capability-card{background:#fff;border:1px solid #e8ede7;border-radius:11px;padding:20px;min-height:180px}
+.capability-index{font-family:Manrope,sans-serif;font-size:10px;font-weight:800;color:#86a83a}
+.capability-card h3{font-family:Manrope,sans-serif;font-size:15px;margin:17px 0 7px}
+.capability-card p{font-size:10px;line-height:1.7;color:#7f8980;min-height:50px;margin:0}
+.capability-status{display:inline-block;margin-top:14px;font-size:8px;letter-spacing:.8px;color:#89927f;background:#f4f6f1;padding:6px 8px;border-radius:5px;font-weight:800}
+.access-band{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:25px 28px;background:#f3f7eb;border:1px solid #e6edd9;border-radius:13px;margin-bottom:35px}
+.access-band h2{max-width:600px;font-size:21px}
+.access-link{width:auto;min-width:230px;text-decoration:none;margin:0}
+.portal-footer{border-top:1px solid var(--line);padding:22px 0 28px;display:flex;justify-content:space-between;gap:15px;color:#98a198;font-size:9px}
+.portal-footer a{color:#657b32;text-decoration:none;font-weight:700}
+@media(max-width:800px){.portal-shell{padding:0 20px}.portal-header{height:70px;gap:15px}.portal-nav{gap:14px;margin-left:0}.portal-nav a{padding:26px 0;font-size:10px}.portal-state{font-size:0;padding:9px}.portal-state i{width:7px;height:7px}.portal-hero{padding:45px 0 30px;grid-template-columns:1fr;gap:25px}.portal-callout{justify-self:start;max-width:100%}.driver-layout{grid-template-columns:1fr}.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.access-band{align-items:flex-start;flex-direction:column}.access-link{width:100%}}
+@media(max-width:480px){.portal-shell{padding:0 14px}.portal-header{gap:10px}.portal-header .brand{font-size:16px;gap:7px}.portal-header .brand-mark{width:30px;height:30px}.portal-nav{gap:10px}.portal-nav a{font-size:9px}.portal-hero h1{font-size:49px}.portal-lead{font-size:14px}.portal-panel,.driver-requirements{padding:19px}.capability-grid{grid-template-columns:1fr}.capability-card{min-height:0}.capability-card p{min-height:0}.portal-footer{flex-direction:column}}
+.main-nav a.nav-link{text-decoration:none;display:flex;align-items:center}
+
+
+/* Functional passenger booking experience */
+.network-pill.online i{background:#78a52b}
+.network-pill.offline{background:#fff1ed;color:#a24d36}
+.network-pill.offline i{background:#d56c50}
+.market-tag,.map-provider-label{font-size:9px;color:#829079;background:#f2f6ec;border:1px solid #e5ecd9;border-radius:20px;padding:7px 10px}
+.passenger-workspace{align-items:start}
+.passenger-app .booking-card{display:block}
+.place-search-row{display:flex;align-items:center;gap:7px}
+.place-search-row input{flex:1;min-width:0;width:100%;height:34px}
+.place-search-button{border:1px solid #dfe8d2;background:#f4f8ed;color:#58751f;border-radius:6px;padding:7px 10px;font-size:10px;font-weight:700}
+.place-search-button:disabled{opacity:.55;cursor:wait}
+.location-action{align-self:flex-start;border:0;background:transparent;color:#66851f;padding:5px 0 0;font-size:9px;font-weight:700}
+.selected-place{font-size:9px;color:#5f8520;margin-top:3px}
+.place-results{position:relative;z-index:5;display:grid;gap:1px;margin:8px 0 5px;background:#fff;border:1px solid #e7ece4;border-radius:7px;overflow:hidden;box-shadow:0 8px 24px #17231f12}
+.place-results button{border:0;background:#fff;text-align:left;padding:10px 11px;font-size:10px;line-height:1.45;color:#59645b}
+.place-results button:hover,.place-results button:focus{background:#f4f8ed}
+.location-field:has(.place-results){height:auto;min-height:90px;padding:12px 0}
+.location-field:has(.place-results) input{width:100%}
+.location-field.destination-field{min-height:85px}
+.note-field{display:grid;gap:7px;color:#68756b;font-size:10px;font-weight:700}
+.note-field textarea{resize:vertical;min-height:58px;border:1px solid #e5eae3;border-radius:7px;padding:10px 11px;color:var(--ink);font-size:11px;line-height:1.5;outline:none}
+.note-field textarea:focus{border-color:#a8c66d;box-shadow:0 0 0 3px #a8c66d22}
+.no-quote{background:#f8faf5;border:1px solid #edf1e8;border-radius:8px;padding:12px;margin-top:14px}
+.no-quote strong{font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#66735f}
+.no-quote small{line-height:1.5}
+.request-button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.live-map-panel{height:527px;background:#edf2e9}
+.live-map-panel iframe{display:block;width:100%;height:100%;border:0}
+.map-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;color:#74816f;background:linear-gradient(145deg,#edf3e8,#e5eee0)}
+.map-empty>span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#7c9d36;font-size:25px;margin-bottom:14px}
+.map-empty strong{font-family:Manrope,sans-serif;font-size:15px;color:#344237}
+.map-empty p{max-width:240px;font-size:10px;line-height:1.6}
+.map-attribution{font-size:8px;color:#9aa49a;text-align:right;margin-top:7px}
+.history-panel{background:#fff;border:1px solid #e8ede7;border-radius:11px;overflow:hidden;margin:4px 0 20px}
+.history-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;border:0;background:#fff;padding:14px 15px;text-align:left;color:var(--ink)}
+.history-toggle>span:first-child{display:grid;gap:4px}
+.history-toggle b{font-size:11px}
+.history-toggle small{font-size:9px;color:#8b968b}
+.history-toggle>span:last-child{font-size:20px;color:#799d32}
+.history-list{border-top:1px solid #edf0ec;padding:4px 14px}
+.history-list>p{font-size:10px;color:#89948a;padding:10px 0}
+.history-item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #f0f2ef}
+.history-item:last-child{border-bottom:0}
+.history-item>div{min-width:0;display:grid;gap:4px}
+.history-item strong{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.history-item small{font-size:9px;color:#8b968b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.booking-status{align-self:flex-start;flex-shrink:0;background:#f2f6ec;color:#668329;border-radius:5px;padding:6px 7px;font-size:8px;font-weight:700}
+.passenger-app .map-foot{border:1px solid #edf0ec;border-radius:9px;margin:10px 0 14px;padding:12px}
+@media(max-width:760px){
+  .passenger-app .map-panel{height:320px}
+  .passenger-app .live-map-panel{height:320px}
+  .passenger-app .section-heading{align-items:flex-start;gap:10px}
+  .market-tag{max-width:145px;text-align:center;line-height:1.4}
+  .place-search-row input{font-size:12px}
+  .history-item strong,.history-item small{max-width:190px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
+
+.portal-auth-button{margin-left:auto;border:0;border-radius:8px;background:var(--ink);color:#fff;padding:11px 15px;font-size:10px;font-weight:700;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.portal-auth-button:disabled{opacity:.75;cursor:default}
+@media(max-width:480px){.portal-auth-button{padding:9px 10px;font-size:9px;max-width:125px}.portal-header{gap:9px}.portal-nav{gap:9px}}
+
+
+/* Shared keyboard, touch and disabled-state affordances. */
+:where(a,button,input,textarea,select,[tabindex]):focus-visible{
+  outline:3px solid #527d12;
+  outline-offset:3px;
+  border-radius:5px;
+}
+button:disabled{
+  cursor:not-allowed;
+  opacity:.58;
+}
+button,a,input,textarea,select{
+  -webkit-tap-highlight-color:transparent;
+}
+button,a{
+  touch-action:manipulation;
+}
+[aria-live="polite"]{
+  overflow-wrap:anywhere;
+}
+@media(max-width:760px){
+  .app-shell{padding-left:18px;padding-right:18px}
+  .topbar{gap:14px}
+  .main-nav{gap:14px}
+  .header-actions{gap:8px}
+  .network-pill{display:none}
+}
+@media(max-width:360px){
+  .brand{font-size:18px;gap:7px}
+  .brand-mark{width:32px;height:32px}
+  .main-nav{gap:9px}
+  .nav-link{font-size:11px}
+  .sign-in{padding:10px 9px;font-size:10px}
+}
+
+
+/* Operator health panel: connectivity only, never operational metrics. */
+.operator-health{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+  align-items:center;
+  gap:24px;
+  padding:22px 25px;
+  margin:0 0 36px;
+  border:1px solid #e7ece4;
+  border-radius:12px;
+  background:#fff;
+}
+.operator-health-copy h2{
+  font-family:Manrope,sans-serif;
+  font-size:20px;
+  letter-spacing:-.7px;
+  margin:7px 0 5px;
+}
+.operator-health-copy p{
+  max-width:520px;
+  margin:0;
+  color:#879188;
+  font-size:10px;
+  line-height:1.65;
+}
+.operator-health-status{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+  padding:13px;
+  background:#f8faf6;
+  border-radius:8px;
+}
+.operator-health-status>div{display:grid;gap:4px;min-width:0;flex:1}
+.operator-health-status strong{font-size:10px;color:#455347}
+.operator-health-status small{font-size:9px;color:#8b968b;overflow-wrap:anywhere}
+.operator-health-status button{
+  border:1px solid #dfe8d2;
+  border-radius:6px;
+  padding:8px 10px;
+  color:#5d7729;
+  background:#fff;
+  font-size:9px;
+  font-weight:700;
+}
+.operator-health-status button:disabled{opacity:.55}
+.health-indicator{width:9px;height:9px;border-radius:50%;flex:0 0 auto;background:#b4bdb0}
+.health-indicator.healthy{background:#78a52b;box-shadow:0 0 0 4px #78a52b18}
+.health-indicator.unavailable{background:#d56c50;box-shadow:0 0 0 4px #d56c5018}
+.health-indicator.checking{background:#d1a64b}
+.operator-health-error{grid-column:1/-1;color:#a24d36;font-size:10px;margin:0}
+.capability-dependency{display:block;margin-top:9px;color:#929c91;font-size:9px;line-height:1.5}
+@media(max-width:800px){
+ .operator-health{grid-template-columns:1fr;padding:18px;gap:15px}
+}
+
+
+/* On the Way brand alignment: premium purple with a restrained gold action accent. */
+:root{
+  --ink:#1d0b3f;
+  --green:#f5b51b;
+  --green-dark:#32106b;
+  --soft:#f8f4ff;
+  --paper:#fcfbff;
+  --shadow:0 18px 55px rgba(39,17,75,.07);
+}
+.brand-mark{background:#32106b;color:#f5b51b}
+.brand-mark span{color:#fff}
+.nav-link.active:after,.eyebrow-line{background:#32106b}
+h1 em{color:#32106b}
+.hero-note{background:#fff9e9;border-color:#f3e6bf}
+.note-orb{background:#f8e8b7;color:#6e4a00}
+.request-button{background:#f5b51b;color:#1d0b3f}
+.request-button:hover{background:#ffca45}
+.ride-option.selected,.vehicle-chip.selected{background:#f8f4ff;border-color:#cbb8e9;color:#32106b}
+.radio-mark,.selected-place,.location-action{color:#32106b}
+.place-search-button{border-color:#e6d8f6;background:#f8f4ff;color:#32106b}
+.portal-tags span,.market-tag,.map-provider-label{color:#4d3474;background:#f8f4ff;border-color:#e8def5}
+.portal-callout,.access-band{background:#fffaf0;border-color:#f1e5c6}
+.callout-symbol{background:#f8e8b7;color:#6e4a00}
+.portal-nav a.active:after{background:#32106b}
+:where(a,button,input,textarea,select,[tabindex]):focus-visible{outline-color:#32106b}
+@media(prefers-reduced-motion:reduce){.request-button:hover{transform:none}}
+
+
+/* PWA connectivity and user-controlled update prompts. */
+.app-update-banner,.app-connectivity-banner,.app-update-error{
+  position:fixed;z-index:1000;left:50%;bottom:18px;transform:translateX(-50%);
+  width:min(640px,calc(100vw - 28px));display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding:14px 16px;border:1px solid #e5d9f2;border-radius:16px;
+  background:#fff;box-shadow:0 16px 48px rgba(29,11,63,.18);color:#1d0b3f;
+}
+.app-update-banner span{display:grid;gap:3px}
+.app-update-banner small{font-size:12px;color:#625a6e}
+.app-update-banner button{flex:none;border:0;border-radius:10px;padding:10px 14px;background:#32106b;color:#fff;font-weight:700;cursor:pointer}
+.app-update-banner button:focus-visible{outline:3px solid #f5b51b;outline-offset:3px}
+.app-connectivity-banner{justify-content:center;background:#fff8e8;border-color:#f0dca8;color:#654900;font-size:13px}
+.app-update-error{justify-content:center;font-size:13px}
+@media(max-width:480px){
+ .app-update-banner{align-items:flex-start;flex-direction:column}
+ .app-update-banner button{width:100%}
+}
+
+
+/* Driver availability eligibility and operator review workspaces. */
+.driver-availability-panel{display:grid;gap:12px;margin-top:18px;padding:17px;border:1px solid #e9e1f2;border-radius:14px;background:#faf8fd}
+.driver-availability-panel>div{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#32106b;font-size:13px}
+.driver-live-state{padding:5px 10px;border-radius:18px;background:#f1edf6;color:#665675;font-size:10px;font-weight:800;text-transform:uppercase}
+.driver-live-state.online{background:#edf5e5;color:#496b24}
+.driver-availability-panel ul{margin:0;padding-left:18px;color:#766c80;font-size:11px;line-height:1.7}
+.driver-availability-panel small{color:#81778c;font-size:10px;line-height:1.6}
+
+/* Authorized operator driver-review workspace. */
+.operator-review-section{margin:44px 0;padding:30px;border:1px solid #e9e1f2;border-radius:22px;background:#fff;box-shadow:0 14px 42px rgba(39,17,75,.045)}
+.operator-review-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.operator-review-toolbar label,.operator-driver-actions label{display:grid;gap:6px;color:#55476b;font-size:11px;font-weight:700}
+.operator-review-toolbar select,.operator-driver-actions input,.operator-driver-actions textarea{min-height:40px;padding:9px 11px;border:1px solid #ded5e9;border-radius:9px;background:#fff;color:#24123f;font:inherit}
+.operator-review-toolbar button,.operator-driver-actions button{min-height:38px;padding:9px 13px;border:1px solid #ded5e9;border-radius:9px;background:#f8f4ff;color:#32106b;font-size:11px;font-weight:700;cursor:pointer}
+.operator-review-toolbar button:disabled,.operator-driver-actions button:disabled{opacity:.55;cursor:wait}
+.operator-access-message,.operator-empty-state{padding:18px;border:1px solid #e9e1f2;border-radius:13px;background:#faf8fd;color:#32106b;font-size:12px}
+.operator-access-message p{color:#625a6e;line-height:1.6}
+.operator-access-message a{color:#32106b;font-weight:700}
+.operator-driver-card{margin:12px 0;padding:18px;border:1px solid #e9e1f2;border-radius:15px;background:#fdfcff}
+.operator-driver-summary{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.operator-driver-summary>div{display:grid;gap:5px}.operator-driver-summary strong{color:#24123f;font-size:14px}.operator-driver-summary span{color:#72677f;font-size:11px}
+.operator-driver-status{padding:6px 9px;border-radius:20px;background:#f2edf8;color:#55416f;font-size:9px;font-weight:800;text-transform:uppercase;white-space:nowrap}
+.operator-driver-status.status-verified{background:#edf5e5;color:#496b24}.operator-driver-status.status-rejected,.operator-driver-status.status-suspended{background:#fff0ed;color:#9a4937}
+.operator-driver-meta,.operator-review-footnote{color:#81778c;font-size:10px;line-height:1.6}
+.operator-driver-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.operator-driver-actions label{grid-column:span 1}.operator-driver-actions label:has(textarea){grid-column:1/-1}
+.operator-driver-actions .operator-approve-button{background:#32106b;color:#fff;border-color:#32106b;align-self:flex-end}
+.operator-decision-row{display:flex;gap:9px;align-items:flex-end}.operator-decision-row button:last-child{color:#9a4937}
+.operator-review-notice{padding:12px;border-radius:10px;background:#edf5e5;color:#496b24;font-size:11px}
+@media(max-width:620px){.operator-review-section{padding:18px;margin:28px 0}.operator-driver-actions{grid-template-columns:1fr}.operator-driver-actions label,.operator-driver-actions label:has(textarea){grid-column:1}.operator-decision-row{flex-wrap:wrap}.operator-driver-summary{flex-direction:column}}
