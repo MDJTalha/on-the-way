@@ -494,3 +494,20 @@ This checkpoint is local verification evidence, not production certification. Pr
 
 The payment policy file is configuration documentation only. No payment method, booking, fare quote or dispatch capability is activated by this change.
 - [x] Add a CI-enforced configuration invariant test to keep Lahore/PKR aligned and all payment collection, cash, local digital rails, Pi payments, bookings, dispatch and fare quotes disabled until release approval.
+
+## FairBid, communications and trip safety — 24 November 2026
+
+- [x] Research the published inDrive bid/counteroffer model and document a two-sided negotiated fare methodology.
+- [x] Specify route/time/pickup-approach based PKR reference pricing, bounded demand adjustments, fare locking and dispute handling; no active tariff values are invented.
+- [x] Research Punjab TNC licensing, DPPT and 2026 safety requirements; add explicit legal and operational gates.
+- [x] Specify booking-scoped chat, masked calling, push/SMS fallback, live location privacy, SOS and incident response.
+- [x] Add migration 010 schema foundations for versioned fare policies, route-linked quotes, offer history, booking conversations, masked-call sessions, trip telemetry and safety incidents.
+- [x] Add migration 010 to the CI PostgreSQL/PostGIS migration sequence.
+- [ ] Validate migration 010 in CI and run relational/concurrency acceptance tests.
+- [ ] Implement quote, bid, counteroffer, acceptance and fare-lock APIs with atomic controls.
+- [ ] Implement captain matching/dispatch and realtime event delivery.
+- [ ] Implement chat, masked-call provider adapter, tracking, share-trip, SOS and incident workflows.
+- [ ] Confirm Punjab-authorised payment modes; do not enable cash without written clearance.
+- [ ] Complete Lahore legal, driver, safety and operational certification.
+
+See [FairBid negotiation, communications and safety architecture](fairbid-negotiation-communications-safety.md). This is not a live fare/ride service; no fare policies are seeded and no dispatch, contact, tracking or payment provider is enabled.

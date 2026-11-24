@@ -95,3 +95,16 @@ Production remains **NO-GO** while any critical gate above is incomplete or unsu
 - [ ] Complete routing, Pi Testnet payment, accessibility, security and operational acceptance.
 
 See [Lahore pilot market profile](pilot-market-lahore.md) and config/pilot-market.json. Market selection does not authorize launch; booking, dispatch, fare quotes and payments remain disabled pending their release gates.
+
+## FairBid and marketplace operations
+
+- [x] Define two-sided passenger/captain fare negotiation with a route-based reference fare, expiring offers, immutable negotiation history and fare lock.
+- [x] Specify booking-scoped chat and masked-call architecture; participant numbers must not be disclosed to each other by default.
+- [x] Specify active-trip location sharing, privacy controls, SOS and incident response.
+- [ ] Complete pricing-policy calibration using verified Lahore vehicle operating costs and legal review.
+- [ ] Implement and test negotiation APIs, driver offer fan-out, one-winner acceptance and dispatch state machine.
+- [ ] Implement provider-backed realtime messaging and masked calling after Pakistan coverage/compliance verification.
+- [ ] Implement live tracking, short-lived trip sharing links, retention jobs and incident console.
+- [ ] Obtain written TNC/DPPT and payment-mode clearance before live trips.
+
+See `docs/fairbid-negotiation-communications-safety.md` and migration 010. Schema foundations do not mean these services are operational.
