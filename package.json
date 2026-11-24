@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "start:ci": "next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "next": "15.5.29",

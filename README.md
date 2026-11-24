@@ -59,6 +59,9 @@ Verification:
 ```powershell
 npm run typecheck
 npm run build
+
+# With the production server running
+SMOKE_BASE_URL=http://127.0.0.1:3000 npm run test:smoke
 ```
 
 ## Environment and secrets

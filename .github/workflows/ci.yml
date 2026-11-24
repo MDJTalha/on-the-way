@@ -48,3 +48,18 @@ jobs:
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/009_service_zone_administration.sql
       - run: npm run typecheck
       - run: npm run build
+      - name: Start production server and run smoke tests
+        env:
+          DATABASE_URL: postgresql://otw_ci:ci-only-password@localhost:5432/on_the_way_ci
+          SESSION_SECRET: ci-only-session-secret-that-is-at-least-32-characters-long
+          NEXT_PUBLIC_PI_SANDBOX: "true"
+        run: |
+          timeout 90s npm run start:ci > /tmp/on-the-way-next.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:3000/api/health >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:3000/api/health >/dev/null
+          npm run test:smoke

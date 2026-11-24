@@ -27,7 +27,8 @@ The roadmap is evidence-driven. A milestone is complete only after implementatio
 - [x] Driver application profile foundation; document-submission and verification workflow remain open.
 - [ ] Country, city, service-zone, currency and timezone configuration.
 - [x] Driver application captures an ISO country code; availability checks city + country against an active service zone.
-- [ ] Audit events, structured logs and request correlation.
+- [x] Append-only domain audit events for booking, driver, vehicle and service-zone changes.
+- [ ] Structured logs, request correlation and centralized monitoring.
 
 ## Milestone 3 — Booking and pricing
 - [x] Server-side ride request validation and authenticated persistence.
@@ -455,3 +456,18 @@ Update-system verification: `npm run typecheck`, optimized `npm run build` and `
 - [ ] Verify route coverage and supported transport modes in the selected pilot city.
 
 Satellite imagery is supplied by the Google Maps Embed API satellite map type. It is not a separate Google Earth web application embedded in the page.
+
+
+## QA automation checkpoint ? 24 November 2026
+
+- [x] Fresh disposable PostgreSQL 16 + PostGIS database accepted migrations 001?009 in numeric order; the temporary database was dropped after validation.
+- [x] Production build and TypeScript checks passed locally.
+- [x] Dependency audit reported zero vulnerabilities.
+- [x] Production HTTP smoke suite passed passenger, driver, operator, manifest and service-worker routes; health reported a connected database.
+- [x] Smoke suite confirmed unauthenticated booking, vehicle and operator APIs return HTTP 401.
+- [x] CI now includes the same production-server smoke suite after migrations, dependency audit, typecheck and build.
+- [x] Application source and documentation committed locally; GitHub publication remains blocked until the connected account receives repository write permission.
+- [ ] Configure a restricted Google Maps Embed API key; satellite imagery and in-app directions remain on the OpenStreetMap fallback until configured.
+- [ ] Complete real Pi Pioneer acceptance, production geocoding, fare quotes, dispatch, trip lifecycle, Pi Testnet payments, operational controls, WCAG 2.2 AA and pilot sign-off.
+
+This checkpoint is local verification evidence, not production certification. Production remains NO-GO.
