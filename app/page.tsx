@@ -106,20 +106,15 @@ export default function Home() {
     setSearching(which);
     setNotice("");
     try {
-      // Development geocoder only. Replace with a contracted provider before production.
-      const url = new URL("https://nominatim.openstreetmap.org/search");
-      url.searchParams.set("q", query);
-      url.searchParams.set("format", "jsonv2");
-      url.searchParams.set("limit", "5");
-      const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
-      if (!response.ok) throw new Error("Place search is temporarily unavailable.");
+      const response = await fetch(`/api/places/search?q=${encodeURIComponent(query)}`, { cache: "no-store" });
       const payload: unknown = await response.json();
-      const results = Array.isArray(payload) ? payload.filter((item): item is SearchResult =>
-        item !== null && typeof item === "object" &&
-        typeof item.display_name === "string" && item.display_name.length > 0 &&
-        Number.isFinite(Number(item.lat)) && Number(item.lat) >= -90 && Number(item.lat) <= 90 &&
-        Number.isFinite(Number(item.lon)) && Number(item.lon) >= -180 && Number(item.lon) <= 180
-      ).slice(0, 5) : [];
+      if (!response.ok) {
+        const message = payload && typeof payload === "object" && typeof (payload as { error?: unknown }).error === "string"
+          ? (payload as { error: string }).error : "Place search is temporarily unavailable.";
+        throw new Error(message);
+      }
+      const results = payload && typeof payload === "object" && Array.isArray((payload as { results?: unknown }).results)
+        ? (payload as { results: SearchResult[] }).results : [];
       if (sequence !== searchSequence.current) return;
       if (which === "pickup") setPickupResults(results);
       else setDestinationResults(results);
@@ -158,14 +153,12 @@ export default function Home() {
       const { latitude, longitude } = position.coords;
       let label = `Current location (${latitude.toFixed(5)}, ${longitude.toFixed(5)})`;
       try {
-        const url = new URL("https://nominatim.openstreetmap.org/reverse");
-        url.searchParams.set("lat", String(latitude));
-        url.searchParams.set("lon", String(longitude));
-        url.searchParams.set("format", "jsonv2");
-        const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
+        const response = await fetch(`/api/places/reverse?lat=${latitude}&lon=${longitude}`, { cache: "no-store" });
         if (response.ok) {
-          const data = await response.json();
-          if (typeof data.display_name === "string") label = data.display_name;
+          const data: unknown = await response.json();
+          if (data && typeof data === "object" && typeof (data as { display_name?: unknown }).display_name === "string") {
+            label = (data as { display_name: string }).display_name;
+          }
         }
       } catch { /* Coordinates remain usable without a reverse-geocoded label. */ }
       setPickup({ label, latitude, longitude });

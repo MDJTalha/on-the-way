@@ -19,7 +19,8 @@ This repository now contains the responsive Next.js passenger, driver and operat
 | Pi authentication | Implemented locally; real Pi Browser/Sandbox acceptance pending |
 | Backend, database and persistent accounts | Initial local API, PostgreSQL schema and signed passenger sessions implemented |
 | Driver onboarding, verification and dispatch | Application persistence implemented; identity verification and dispatch not implemented |
-| Live geocoding, maps, routes or ETAs | Not integrated |
+| Geocoding | Server-side Mapbox adapter implemented; production token and provider acceptance pending |
+| Maps, routes or ETAs | Google Maps Embed API integration is credential-gated; production routing/ETA service not implemented |
 | Pi payments and reconciliation | Not integrated |
 | Operator console and support workflows | Not implemented |
 
@@ -66,7 +67,7 @@ SMOKE_BASE_URL=http://127.0.0.1:3000 npm run test:smoke
 
 ## Environment and secrets
 
-Copy `.env.example` to `.env.local` and populate only values for services actually configured. Never commit credentials. Pi API secrets must remain server-side and must never use a `NEXT_PUBLIC_` variable. Use Pi Testnet for development; Mainnet requires separate credentials, approval and release authorization.
+Copy `.env.example` to `.env.local` and populate only values for services actually configured. Never commit credentials. MAPBOX_ACCESS_TOKEN and Pi API secrets must remain server-side and must never use a `NEXT_PUBLIC_` variable. NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is a browser-visible key and must be restricted to the Maps Embed API and approved origins. Use Pi Testnet for development; Mainnet requires separate credentials, approval and release authorization.
 
 ## Engineering principles
 
@@ -96,11 +97,11 @@ Driver onboarding now supports a Pi-authenticated, consented application record 
 
 ## Frontend experience update
 
-The passenger screen now supports place search (development geocoder), explicit browser geolocation, a real OpenStreetMap location view, vehicle selection, optional trip notes, authenticated booking submission and persisted booking history. Ride requests use the server's idempotency contract. The interface deliberately does not display sample fares, ETAs, live drivers or fabricated route lines.
+The passenger screen now supports server-routed place search, explicit browser geolocation with server-side reverse geocoding, a real OpenStreetMap location view, vehicle selection, optional trip notes, authenticated booking submission and persisted booking history. Ride requests use the server's idempotency contract. The interface deliberately does not display sample fares, ETAs, live drivers or fabricated route lines.
 
 The application now includes a web manifest, install icons, service-worker registration and an offline fallback page. Offline behavior is informational only; authentication, place search and booking require a live connection.
 
-The public Nominatim geocoder is for development only and must be replaced or formally approved for the intended production usage. The map currently visualizes a selected place, not a navigable route. Fare calculation, scheduling, driver dispatch, live trip tracking and Pi payment remain backend/product release dependencies.
+Place search and reverse geocoding now run through same-origin server routes. Configure MAPBOX_ACCESS_TOKEN (server-side only) to use Mapbox Geocoding API in production; Nominatim is retained only as a development fallback and is disabled automatically in production. Without a production provider token, geocoding fails closed with HTTP 503 rather than silently using a public development service. Provider account, billing, rate/usage limits, geographic coverage and operational acceptance remain release dependencies. The map currently visualizes selected places and an embedded directions view when configured; server-authoritative route distance/ETA, fare calculation, scheduling, driver dispatch, live trip tracking and Pi payment remain backend/product release dependencies.
 
 
 ## Embedded maps

@@ -39,7 +39,17 @@ for (const path of protectedPaths) {
 const home = await (await get("/")).text();
 assert.match(home, /Satellite \/ Earth imagery/, "map mode control should be rendered");
 assert.match(home, /On the Way app updates/, "PWA update controls should be rendered");
+assert.doesNotMatch(home, /nominatim\.openstreetmap\.org/, "browser must not call the development geocoder directly");
+
+const shortSearch = await get("/api/places/search?q=ab");
+assert.equal(shortSearch.status, 422, "place search must reject undersized queries");
+const missingReverseCoordinates = await get("/api/places/reverse");
+assert.equal(missingReverseCoordinates.status, 422, "reverse geocoding must reject missing coordinates");
+const invalidReverseCoordinates = await get("/api/places/reverse?lat=91&lon=0");
+assert.equal(invalidReverseCoordinates.status, 422, "reverse geocoding must reject out-of-range coordinates");
+
 const serviceWorker = await (await get("/sw.js")).text();
 assert.match(serviceWorker, /SKIP_WAITING/, "service worker should support controlled update activation");
 console.log("PASS embedded map controls and PWA update controls are present");
+console.log("PASS geocoding routes validate input and keep provider calls server-side");
 console.log("SMOKE_TESTS_PASSED");

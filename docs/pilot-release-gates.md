@@ -9,7 +9,9 @@ This document separates a working interface preview from a safe, operable mobili
 - [x] Passenger API and isolated PostgreSQL/PostGIS development database.
 - [x] Pi SDK integration, server token verification and signed passenger session foundation; real Pioneer acceptance pending.
 - [x] Driver application persistence with pending/offline status; identity and vehicle verification pending.
-- [ ] Real geocoding, routing and map display.
+- [x] Server-side geocoding adapter with Mapbox production provider support and development-only Nominatim fallback.
+- [ ] Production Mapbox credentials, provider account/billing, usage limits and geographic coverage acceptance.
+- [ ] Production routing and verified route/ETA service.
 - [ ] Server-authoritative fare quotes and full booking state machine.
 - [ ] Verified driver dispatch, trip event stream and live availability.
 - [ ] Pi Testnet payment approval, completion and reconciliation.
