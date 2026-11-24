@@ -163,3 +163,16 @@ Do not optimise only gross bookings or lowest passenger fare. Marketplace viabil
 - WhatsApp Business messaging window: https://www.twilio.com/docs/whatsapp/key-concepts
 
 Research is product/engineering guidance, not legal advice or provider approval. Verify current official notifications and obtain local counsel/authority confirmation before launch.
+
+## 3.4 Provider evaluation shortlist — not a vendor selection
+
+**Pakistan SMS/OTP:** SendPK publicly describes itself as a Lahore-based PTA-approved SMS aggregator and lists transactional SMS, OTP, branded sender IDs and APIs. Treat it as a candidate for an RFP, not an approved On-the-way supplier. Obtain PTA licence/authorisation evidence, operator route coverage (Jazz, Zong, Ufone, Telenor), delivery receipts, sender-ID registration in On-the-way's legal entity name, OTP abuse controls, DPA/data location, support SLA, pricing and test SIM results before onboarding: https://sendpk.com/terms-conditions.php.
+
+**Masked voice:** Twilio and Vonage document voice-proxy/number-masking patterns; 8x8 documents a dedicated Number Masking API with a provider-allocated virtual number and webhook flow. These documents establish the technical pattern, not Pakistan number availability or local call termination. Obtain written vendor confirmation for +92 caller IDs, local mobile termination, inbound/outbound masking, number provisioning, PTA/CLI requirements, call recording defaults, webhook signatures, emergency call limitations, per-minute cost, failover and support before choosing any vendor:
+- https://www.twilio.com/docs/glossary/what-is-voice-proxy
+- https://developer.vonage.com/en/voice/voice-api/guides/masked-calling
+- https://support.cpaas.8x8.com/hc/en-us/sections/59375034292633-Voice-Number-Masking
+
+**WhatsApp:** Use official WhatsApp Business Platform only after business verification, template approval and opt-in. It is suitable for non-critical service updates and support continuity, not a substitute for in-app trip status, SOS or masked voice.
+
+A vendor should pass a proof-of-capability test from multiple Pakistan mobile networks before procurement. Do not send production passenger/driver personal data to a trial account.
