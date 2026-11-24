@@ -98,3 +98,11 @@ The passenger screen now supports place search (development geocoder), explicit 
 The application now includes a web manifest, install icons, service-worker registration and an offline fallback page. Offline behavior is informational only; authentication, place search and booking require a live connection.
 
 The public Nominatim geocoder is for development only and must be replaced or formally approved for the intended production usage. The map currently visualizes a selected place, not a navigable route. Fare calculation, scheduling, driver dispatch, live trip tracking and Pi payment remain backend/product release dependencies.
+
+
+## Embedded maps
+
+- The passenger journey map supports the Google Maps Embed API inside the application, including route directions between selected pickup and destination and satellite imagery (Google Maps satellite layer).
+- Configure NEXT_PUBLIC_GOOGLE_MAPS_API_KEY in the deployment environment after enabling the Maps Embed API in Google Cloud. The API requires a valid key and a billing-enabled Cloud project; the Embed API itself is currently documented by Google as no-charge with unlimited requests. Restrict the key to the Maps Embed API and approved HTTP referrers.
+- When the Google key is absent, the UI retains an OpenStreetMap location fallback. The fallback does not provide verified route directions. Do not treat satellite imagery as a separate embedded Google Earth application; Google Maps satellite mode is the supported embedded imagery path.
+- Map route display is a visual directions view only; fare, dispatch, live driver tracking and booking state remain backend-controlled and are not inferred from the map.

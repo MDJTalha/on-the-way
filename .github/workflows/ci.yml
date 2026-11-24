@@ -44,5 +44,7 @@ jobs:
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/005_driver_application_event_history.sql
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/006_operator_driver_review.sql
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/007_driver_availability_gate.sql
+          psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/008_vehicle_onboarding_review.sql
+          psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/009_service_zone_administration.sql
       - run: npm run typecheck
       - run: npm run build

@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import DriverVehicleOnboarding from "@/components/driver-vehicle-onboarding";
 
 type VehicleType = "car" | "bike" | "rickshaw";
 type DriverApplication = {
@@ -192,6 +193,7 @@ export default function DriverPage() {
         )}
         {application?.verification_status === "verified" && availability && <div className="driver-availability-panel" aria-live="polite"><div><b>Driver availability</b><span className={availability.availability_status === "available" ? "driver-live-state online" : "driver-live-state"}>{availability.availability_status}</span></div>{!availability.eligible && availability.blockers.length > 0 && <ul>{availability.blockers.map((blocker) => <li key={blocker}>{blocker}</li>)}</ul>}<button type="button" className="request-button" onClick={changeAvailability} disabled={availabilityBusy || (!availability.eligible && availability.availability_status !== "available")}>{availabilityBusy ? "Updating…" : availability.availability_status === "available" ? "Go offline" : "Go online"}</button><small>Online activation requires a verified vehicle and an active service zone. Approval alone never activates availability.</small></div>}
         {notice && <div className="notice" role="status" aria-live="polite">{notice}<button type="button" onClick={()=>setNotice("")} aria-label="Dismiss message">×</button></div>}
+        {authenticated && application && <DriverVehicleOnboarding canSubmit={!['rejected','suspended'].includes(application.verification_status)} />}
       </div>
       <aside className="driver-requirements"><span className="step-label">02 / VERIFICATION CHECKLIST</span><h2>Before a driver can go online</h2><ul><li><b>Identity</b><span>Government-issued identity and secure identity review.</span></li><li><b>Driving eligibility</b><span>Valid licence and locally required permits.</span></li><li><b>Vehicle</b><span>Registration, ownership authorization and applicable inspection.</span></li><li><b>Safety</b><span>Insurance and local operating requirements.</span></li></ul><div className="requirement-note">Application status is stored as pending. No document upload, automated KYC, driver approval or dispatch is active yet.</div></aside>
     </section>

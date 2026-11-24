@@ -434,3 +434,88 @@ h1 em{color:#32106b}
 .operator-decision-row{display:flex;gap:9px;align-items:flex-end}.operator-decision-row button:last-child{color:#9a4937}
 .operator-review-notice{padding:12px;border-radius:10px;background:#edf5e5;color:#496b24;font-size:11px}
 @media(max-width:620px){.operator-review-section{padding:18px;margin:28px 0}.operator-driver-actions{grid-template-columns:1fr}.operator-driver-actions label,.operator-driver-actions label:has(textarea){grid-column:1}.operator-decision-row{flex-wrap:wrap}.operator-driver-summary{flex-direction:column}}
+
+
+/* Driver vehicle onboarding and operator vehicle review. */
+.driver-vehicle-panel{display:grid;gap:16px;margin-top:24px;padding-top:22px;border-top:1px solid #eee8f3}
+.driver-vehicle-panel .panel-heading{margin-bottom:0}
+.driver-vehicle-panel .panel-heading p{max-width:620px}
+.driver-vehicle-list{display:grid;gap:9px}
+.driver-vehicle-card{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;border:1px solid #ece6f2;border-radius:12px;background:#fff}
+.driver-vehicle-card>div{display:grid;gap:4px;min-width:0}
+.driver-vehicle-card strong{color:#32106b;font-size:13px}
+.driver-vehicle-card span{color:#81778c;font-size:11px;text-transform:capitalize}
+.driver-vehicle-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.driver-vehicle-fields label{display:grid;gap:7px;color:#4c3d5d;font-size:12px;font-weight:650}
+.driver-vehicle-fields input,.driver-vehicle-fields select{width:100%;min-width:0;padding:11px 12px;border:1px solid #e5ddec;border-radius:9px;background:#fff;color:#29113f;font:inherit;font-weight:450}
+.driver-vehicle-fields input:focus,.driver-vehicle-fields select:focus{outline:2px solid #8d65c4;outline-offset:2px}
+.driver-vehicle-form{gap:14px}
+.driver-vehicle-form .consent-row{align-items:flex-start}
+.driver-vehicle-panel .operator-review-footnote{margin:0}
+@media(max-width:600px){.driver-vehicle-fields{grid-template-columns:minmax(0,1fr)}.driver-vehicle-card{align-items:flex-start;flex-direction:column}}
+
+.operator-evidence-checklist {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  margin: 0.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line, rgba(255,255,255,.14));
+  border-radius: 12px;
+}
+.operator-evidence-checklist legend {
+  padding: 0 .35rem;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.operator-evidence-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.operator-evidence-checklist input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-top: .15rem;
+  accent-color: var(--accent, #c6a56b);
+}
+
+/* Persistent PWA update control; available on every app screen. */
+.app-update-banner-compact{
+  left:auto;
+  right:14px;
+  bottom:14px;
+  transform:none;
+  width:auto;
+  max-width:min(440px,calc(100vw - 28px));
+  padding:9px 11px;
+  gap:12px;
+  border-radius:12px;
+}
+.app-update-banner-compact span{gap:2px}
+.app-update-banner-compact strong{font-size:11px}
+.app-update-banner-compact small{font-size:10px}
+.app-update-banner-compact button{padding:8px 10px;font-size:10px;white-space:nowrap}
+.app-update-banner-available{bottom:14px}
+.app-connectivity-banner{bottom:86px}
+@media(max-width:480px){
+  .app-update-banner-compact{left:auto;right:10px;bottom:10px;width:auto;max-width:calc(100vw - 20px);flex-direction:row;align-items:center}
+  .app-update-banner-compact span{min-width:0}
+  .app-update-banner-compact small{max-width:180px}
+  .app-update-banner-compact button{width:auto}
+  .app-update-banner-available{left:10px;right:10px;bottom:10px;width:auto;max-width:none;flex-direction:column;align-items:stretch}
+  .app-update-banner-available button{width:100%}
+  .app-connectivity-banner{bottom:120px}
+}
+
+/* Embedded Google Maps controls and responsive map modes. */
+.map-mode-switch{display:flex;gap:7px;margin:-5px 0 12px;flex-wrap:wrap}
+.map-mode-switch button{border:1px solid #e6def0;border-radius:7px;background:#fff;color:#57466e;padding:8px 11px;font-size:10px;font-weight:700}
+.map-mode-switch button.active{background:#32106b;border-color:#32106b;color:#fff}
+.map-mode-switch button:disabled{opacity:.48;cursor:not-allowed}
+.live-map-panel iframe{display:block;width:100%;height:100%;border:0}
+.map-attribution{line-height:1.5}

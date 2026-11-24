@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import OperatorDriverReview from "@/components/operator-driver-review";
+import OperatorVehicleReview from "@/components/operator-vehicle-review";
+import OperatorServiceZones from "@/components/operator-service-zones";
+import OperatorAuditHistory from "@/components/operator-audit-history";
 
 type Health = {
   status?: string;
@@ -74,6 +77,9 @@ export default function BusinessPage() {
       </section>
 
       <OperatorDriverReview />
+      <OperatorVehicleReview />
+      <OperatorServiceZones />
+      <OperatorAuditHistory />
 
       <section className="business-section"><div className="panel-heading"><span className="step-label">PLATFORM CAPABILITIES</span><h2>One operating layer for mobility</h2><p>Each capability is linked to the real service required before operators can use it.</p></div><div className="capability-grid">{capabilities.map((item, index) => <article className="capability-card" key={item.title}><span className="capability-index">0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p><span className="capability-status">NOT CONNECTED</span><small className="capability-dependency">Requires: {item.dependency}</small></article>)}</div></section>
 

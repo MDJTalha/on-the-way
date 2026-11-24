@@ -61,6 +61,7 @@ export default function Home() {
   const [apiState, setApiState] = useState<"checking" | "online" | "offline">("checking");
   const [locating, setLocating] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [mapMode, setMapMode] = useState<"roadmap" | "satellite">("roadmap");
   // Keep the same key for an identical retry after an uncertain network response.
   const pendingRequest = useRef<{ fingerprint: string; key: string } | null>(null);
   const searchSequence = useRef(0);
@@ -268,8 +269,26 @@ export default function Home() {
   }
 
   const mapPlace = destination ?? pickup;
-  const mapSrc = mapPlace
-    ? `https://www.openstreetmap.org/export/embed.html?bbox=${mapPlace.longitude - 0.025}%2C${mapPlace.latitude - 0.018}%2C${mapPlace.longitude + 0.025}%2C${mapPlace.latitude + 0.018}&layer=mapnik&marker=${mapPlace.latitude}%2C${mapPlace.longitude}`
+  const googleMapsKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const googleMapsSrc = googleMapsKey && mapPlace
+    ? (() => {
+        const base = "https://www.google.com/maps/embed/v1/";
+        const params = new URLSearchParams({ key: googleMapsKey });
+        if (pickup && destination) {
+          params.set("origin", pickup.latitude + "," + pickup.longitude);
+          params.set("destination", destination.latitude + "," + destination.longitude);
+          params.set("mode", vehicle === "bike" ? "bicycling" : "driving");
+          params.set("maptype", mapMode);
+          return base + "directions?" + params.toString();
+        }
+        params.set("center", mapPlace.latitude + "," + mapPlace.longitude);
+        params.set("zoom", "16");
+        params.set("maptype", mapMode);
+        return base + "view?" + params.toString();
+      })()
+    : "";
+  const fallbackMapSrc = mapPlace
+    ? "https://www.openstreetmap.org/export/embed.html?bbox=" + (mapPlace.longitude - 0.025) + "%2C" + (mapPlace.latitude - 0.018) + "%2C" + (mapPlace.longitude + 0.025) + "%2C" + (mapPlace.latitude + 0.018) + "&layer=mapnik&marker=" + mapPlace.latitude + "%2C" + mapPlace.longitude
     : "";
 
   return (
@@ -353,11 +372,15 @@ export default function Home() {
         </div>
 
         <aside className="map-column">
-          <div className="map-topline"><div><span className="step-label">YOUR ROUTE</span><h3>Explore the area</h3></div><span className="map-provider-label">OpenStreetMap</span></div>
-          <div className="map-panel live-map-panel">
-            {mapSrc ? <iframe title="Map showing selected location" src={mapSrc} loading="lazy" referrerPolicy="no-referrer" /> : <div className="map-empty"><span>⌖</span><strong>Your map starts here</strong><p>Search for a pickup or destination to see its location.</p></div>}
+          <div className="map-topline"><div><span className="step-label">YOUR ROUTE</span><h3>Explore the area</h3></div><span className="map-provider-label">{googleMapsKey ? "Google Maps" : "OpenStreetMap fallback"}</span></div>
+          <div className="map-mode-switch" role="group" aria-label="Map display mode">
+            <button type="button" className={mapMode === "roadmap" ? "active" : ""} aria-pressed={mapMode === "roadmap"} onClick={() => setMapMode("roadmap")}>Map</button>
+            <button type="button" className={mapMode === "satellite" ? "active" : ""} aria-pressed={mapMode === "satellite"} disabled={!googleMapsKey} title={googleMapsKey ? "Show Google satellite imagery" : "Configure a restricted Google Maps API key to enable satellite imagery"} onClick={() => setMapMode("satellite")}>Satellite / Earth imagery</button>
           </div>
-          <div className="map-attribution">© OpenStreetMap contributors · Search powered by Nominatim</div>
+          <div className="map-panel live-map-panel">
+            {googleMapsSrc ? <iframe title={pickup && destination ? "Google Maps directions for selected journey" : "Google Maps view of selected location"} src={googleMapsSrc} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /> : fallbackMapSrc ? <iframe title="OpenStreetMap showing selected location" src={fallbackMapSrc} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" /> : <div className="map-empty"><span>?</span><strong>Your map starts here</strong><p>Search for a pickup or destination to see its location.</p></div>}
+          </div>
+          <div className="map-attribution">{googleMapsKey ? "Google Maps ? Embedded map and satellite imagery" : "OpenStreetMap contributors ? Google Maps activates when NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is configured"}</div>
           <div className="map-foot"><div className="coverage-icon">⌖</div><div><strong>{mapPlace ? "Location selected" : "Choose your locations"}</strong><small>{mapPlace ? `${mapPlace.latitude.toFixed(5)}, ${mapPlace.longitude.toFixed(5)}` : "Select a pickup and destination to prepare a request."}</small></div></div>
           <section className="history-panel">
             <button className="history-toggle" type="button" onClick={() => setShowHistory((v) => !v)} aria-expanded={showHistory}><span><b>Recent ride requests</b><small>{user ? `${bookings.length} recorded requests` : "Sign in to view your history"}</small></span><span>{showHistory ? "−" : "+"}</span></button>

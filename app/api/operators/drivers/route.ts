@@ -49,6 +49,7 @@ export async function PATCH(request: NextRequest) {
   const decision = payload.decision;
   const reason = typeof payload.reason === "string" ? payload.reason.trim() : "";
   const verificationReference = typeof payload.verificationReference === "string" ? payload.verificationReference.trim() : "";
+  const evidenceChecks = payload.evidenceChecks && typeof payload.evidenceChecks === "object" ? payload.evidenceChecks as Record<string, unknown> : {};
   if (typeof driverAccountId !== "string" || !uuidPattern.test(driverAccountId) ||
       typeof decision !== "string" || !allowedDecisions.has(decision)) {
     return NextResponse.json({ error: "A valid driver account and review decision are required." }, { status: 422 });
@@ -58,6 +59,10 @@ export async function PATCH(request: NextRequest) {
   }
   if (decision === "verified" && (verificationReference.length < 6 || verificationReference.length > 120)) {
     return NextResponse.json({ error: "A secure verification case reference is required before approval." }, { status: 422 });
+  }
+  const requiredEvidenceChecks = ["identity", "drivingEligibility", "localPermits", "safetyCoverage"];
+  if (decision === "verified" && !requiredEvidenceChecks.every((key) => evidenceChecks[key] === true)) {
+    return NextResponse.json({ error: "Complete every required identity, driving eligibility, local permit and safety coverage check before verification." }, { status: 422 });
   }
   if (decision === "under_review" && reason.length > 500) {
     return NextResponse.json({ error: "Review note must not exceed 500 characters." }, { status: 422 });
@@ -119,7 +124,7 @@ export async function PATCH(request: NextRequest) {
       "(driver_account_id, actor_account_id, event_type, from_verification_status, to_verification_status, event_metadata) " +
       "VALUES ($1, $2, $3, $4, $5, $6::jsonb)",
       [driverAccountId, auth.identity.accountId, eventType, previousStatus, decision,
-        JSON.stringify({ reason: reason || null, verification_reference: decision === "verified" ? verificationReference : null, operator_role: auth.identity.role })],
+        JSON.stringify({ reason: reason || null, verification_reference: decision === "verified" ? verificationReference : null, evidence_checks: decision === "verified" ? Object.fromEntries(requiredEvidenceChecks.map((key) => [key, true])) : null, operator_role: auth.identity.role })],
     );
     await client.query("COMMIT");
     return NextResponse.json({ application: updated.rows[0] }, { headers: { "Cache-Control": "no-store" } });

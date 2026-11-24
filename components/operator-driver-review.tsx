@@ -25,6 +25,7 @@ export default function OperatorDriverReview() {
   const [notice, setNotice] = useState("");
   const [references, setReferences] = useState<Record<string, string>>({});
   const [reasons, setReasons] = useState<Record<string, string>>({});
+  const [evidenceChecks, setEvidenceChecks] = useState<Record<string, Record<string, boolean>>>({});
 
   const loadQueue = useCallback(async () => {
     setLoading(true);
@@ -50,8 +51,13 @@ export default function OperatorDriverReview() {
   const decide = async (application: DriverApplication, decision: "under_review" | "verified" | "rejected" | "suspended") => {
     const reason = (reasons[application.account_id] ?? "").trim();
     const verificationReference = (references[application.account_id] ?? "").trim();
+    const requiredChecks = ["identity", "drivingEligibility", "localPermits", "safetyCoverage"];
     if (decision === "verified" && verificationReference.length < 6) {
       setError("Enter the external verification case reference before approving this driver.");
+      return;
+    }
+    if (decision === "verified" && !requiredChecks.every((key) => evidenceChecks[application.account_id]?.[key] === true)) {
+      setError("Complete all four driver evidence checks before approving this application.");
       return;
     }
     if ((decision === "rejected" || decision === "suspended") && reason.length < 10) {
@@ -70,6 +76,7 @@ export default function OperatorDriverReview() {
           decision,
           reason,
           verificationReference,
+          evidenceChecks: evidenceChecks[application.account_id] ?? {},
         }),
       });
       const data = await response.json() as { error?: string };
@@ -122,7 +129,10 @@ export default function OperatorDriverReview() {
               <label>External verification case reference
                 <input value={references[application.account_id] ?? ""} onChange={(event) => setReferences((current) => ({ ...current, [application.account_id]: event.target.value }))} placeholder="Required for approval" maxLength={120} />
               </label>
-              <button type="button" className="operator-approve-button" disabled={busyId === application.account_id} onClick={() => void decide(application, "verified")}>Approve verification</button>
+              <fieldset className="operator-evidence-checklist"><legend>Evidence review attestations</legend>
+                {([["identity", "Identity document and identity match"], ["drivingEligibility", "Driving licence validity and category"], ["localPermits", "Required local permits and eligibility"], ["safetyCoverage", "Required insurance and safety coverage"]] as const).map(([key, label]) => <label key={key}><input type="checkbox" checked={evidenceChecks[application.account_id]?.[key] === true} onChange={(event) => setEvidenceChecks((current) => ({ ...current, [application.account_id]: { ...current[application.account_id], [key]: event.target.checked } }))} />{label}</label>)}
+              </fieldset>
+              <button type="button" className="operator-approve-button" disabled={busyId === application.account_id || !["identity", "drivingEligibility", "localPermits", "safetyCoverage"].every((key) => evidenceChecks[application.account_id]?.[key] === true)} onClick={() => void decide(application, "verified")}>Approve verification</button>
               <label>Decision reason
                 <textarea value={reasons[application.account_id] ?? ""} onChange={(event) => setReasons((current) => ({ ...current, [application.account_id]: event.target.value }))} placeholder="Required for rejection or suspension" maxLength={500} rows={2} />
               </label>
@@ -134,7 +144,7 @@ export default function OperatorDriverReview() {
           )}
         </article>
       ))}
-      <p className="operator-review-footnote">No identity documents are stored or displayed in this review queue. The verification reference must point to a separately controlled evidence process. Verified drivers remain offline until a separate availability workflow is implemented.</p>
+      <p className="operator-review-footnote">No identity documents are stored or displayed in this review queue. The verification reference must point to a separately controlled evidence process. Driver approval does not activate availability; online status requires a verified matching vehicle and an active city/country service zone.</p>
     </section>
   );
 }

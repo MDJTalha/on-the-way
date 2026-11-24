@@ -39,9 +39,10 @@ The roadmap is evidence-driven. A milestone is complete only after implementatio
 
 ## Milestone 4 — Driver operations and dispatch
 - [x] Operator-authorized driver review queue and transactional decision/audit API foundation (external evidence review and Pioneer acceptance still pending).
-- [ ] Driver onboarding and human verification workflow.
+- [ ] Driver identity, licence and human evidence verification workflow.
+- [x] Driver vehicle metadata onboarding, idempotent submission, operator verification queue and transactional review/audit APIs; secure document evidence remains external.
 - [x] Server-side driver availability gate and audited online/offline transitions; online activation remains blocked until a verified vehicle and active city/country service zone exist.
-- [ ] Secure vehicle onboarding/verification and production service-zone provisioning.
+- [ ] Secure vehicle document storage/evidence-provider integration and production service-zone provisioning.
 - [ ] Geospatial candidate search and dispatch ranking.
 - [ ] Atomic assignment and stale-offer expiry.
 - [ ] Realtime dispatch and trip updates.
@@ -385,3 +386,72 @@ Not certified:
 - Isolated positive-path integration test completed against a disposable PostgreSQL/PostGIS database with migrations 001–007: passenger application (201), operator review (200), operator verification (200), online attempt correctly blocked without verified vehicle/zone (409), online transition after verified vehicle + matching active service zone (200), offline transition (200), and city-change reverification reset to pending/offline with online re-entry blocked (409).
 - The test verified one `application_submitted`, one `review_started`, one `application_verified` and two `availability_changed` audit events. It used short-lived HMAC-signed test sessions and synthetic fixture accounts, not a real Pioneer account.
 - The disposable acceptance database and temporary test script were removed after the test. The primary `on_the_way` database was checked afterward and remained accessible.
+
+
+## Operator service-zone administration — 24 November 2026
+
+Implemented locally:
+- Added migration 009 with service-zone update metadata and append-only service_zone_events history.
+- Added operator/platform-admin GET /api/operators/service-zones; global create/activate/deactivate mutations are restricted to platform_admin. Ordinary operators have read-only access. Mutations use same-origin protection, bounded listing, ISO country/currency validation, and row-locked activation/deactivation.
+- New zones require a GeoJSON MultiPolygon boundary validated by PostGIS for geometry type, validity, non-empty geometry and measurable area. Zones are created inactive.
+- Activation requires an external market-readiness reference and a mapped boundary; all create/activate/deactivate changes are recorded in the same transaction as the configuration mutation.
+- Added an operator console section to create, list, filter, activate and deactivate service zones. The interface explicitly states that zone activation does not enable dispatch, fares, bookings or payments.
+- Added migration 009 to the CI migration sequence and database/architecture documentation.
+
+Verification:
+- Migration 009 applied to the dedicated local on_the_way database; service_zone_events confirmed present.
+- npm run typecheck: passed.
+- npm run build: passed; /api/operators/service-zones compiled as a dynamic route and all 8 static pages generated.
+- npm audit --audit-level=moderate: 0 vulnerabilities.
+- Operator API acceptance used temporary fixtures and short-lived signed sessions: unauthenticated GET (401), authorized listing (200), malformed empty geometry (422), valid zone creation (201), activation without readiness reference (422), activation (200), deactivation (200), and the expected zone_created / zone_activated / zone_deactivated audit sequence.
+- Final role-boundary acceptance against the latest build: ordinary operator listing (200, canManage=false), ordinary operator create (403), platform-admin create (201), platform-admin activate (200) and deactivate (200).
+- PostGIS independently confirmed the MultiPolygon validity predicate. Cleanup verification confirmed zero service zones, zero service-zone events and zero temporary acceptance accounts remained in the primary local database.
+- Local production smoke test: /, /driver, /business, /manifest.webmanifest and /api/health returned HTTP 200; health reported database connected; unauthenticated service-zone GET returned HTTP 401.
+- npm audit reported 0 vulnerabilities; local free disk space was approximately 7.7 GiB at the check.
+- No pilot zone was created or activated and no real user data was added. Visual/accessibility review and real market-readiness evidence remain outstanding.
+- Git executable remains unavailable on the Windows checkout. No commit, push or deployment was performed.
+
+
+## Structured driver and vehicle evidence attestations — 24 November 2026
+
+Implemented locally:
+- Driver verification now requires a secure external evidence-case reference plus four explicit operator attestations: identity match, driving eligibility/licence, local permits and safety coverage.
+- Vehicle verification now requires an external evidence-case reference plus four explicit attestations: registration/ownership match, insurance, inspection and physical vehicle identity.
+- Both APIs validate every required attestation server-side; a client cannot bypass the checklist by calling the route directly with only a case reference.
+- Successful verification stores the exact attestation set, external case reference, operator role and decision metadata in the existing append-only driver_application_events or vehicle_events record in the same transaction as the status change.
+- Added checklist controls to the operator driver and vehicle review screens, with approval disabled until all required checks are selected. Added responsive checklist styling.
+- No identity documents, licence numbers, registration plates, images or other sensitive evidence are collected or stored. The external evidence repository remains a separate prerequisite and case references remain pointers, not proof.
+- Updated database and architecture documentation.
+
+Verification:
+- npm run typecheck: passed.
+- npm run build: passed; all 8 static pages generated and driver/vehicle operator API routes compiled.
+- Driver-review HTTP acceptance on the latest production build used disposable fixture accounts: application submission (201), verification without attestations (422), verification with all four attestations (200), and audit event inspection confirmed application_verified with all four boolean attestations recorded.
+- The driver acceptance fixture and related audit/profile/account rows were cleaned up in the test finally block. No Pioneer account or real driver data was used.
+- Vehicle checklist API validation is implemented and compiled, but a separate positive-path vehicle HTTP acceptance test remains outstanding.
+- Secure evidence-provider integration, private encrypted object storage, reviewer access to actual documents, retention/deletion policy, real operator acceptance, accessibility review and production security review remain outstanding.
+- No Git commit, push or deployment was performed; Git CLI is still unavailable in the checkout.
+\n\nOperator audit history is available at `GET /api/operators/audit` for signed-in operator and platform-administrator accounts. The endpoint merges driver application, vehicle, service-zone and booking lifecycle events into a read-only feed with entity filtering and bounded offset pagination. It returns actor display names and status transitions, and deliberately allowlists only boolean evidence attestations; it does not expose free-text reasons, external verification references, document content, raw event metadata or credentials. The feed is operational visibility, not a replacement for immutable database backups, retention controls or a tamper-evident external audit archive.\n\n\n## Operator audit history and vehicle verification acceptance — 24 November 2026\n\nImplemented a read-only operator audit feed across driver application, vehicle, service-zone and booking lifecycle events. Access requires a signed session plus an explicit operator or platform-administrator role. The feed supports entity filtering, bounded pagination, stable timestamp/ID ordering and an allowlisted response projection; free-text reasons, external verification references and raw event metadata are excluded.\n\nVehicle-review HTTP acceptance was run against the local production build using disposable records, which were removed in the test cleanup: driver application 201; vehicle submission 201; approval without required attestations 422; approval with all four attestations 200; four evidence booleans present in the append-only event; operator audit feed 200; external case reference absent from the feed; unauthenticated audit request 401.\n\nThe TypeScript check and optimized Next.js build passed before the final pagination refinement; a fresh final check/build and dependency audit are running. This does not establish secure evidence-document storage, Pi payment integration, dispatch/trip lifecycle, production Pi credentials, pilot-market readiness, mobile Pi Browser acceptance or production operational readiness.\n
+
+Final verification on 24 November 2026: `npm run typecheck` passed; optimized `npm run build` passed with `/api/operators/audit` compiled; `npm audit --audit-level=moderate` reported zero vulnerabilities. Production-build smoke checks returned HTTP 200 for `/`, `/driver`, `/business`, `/manifest.webmanifest` and `/api/health`; health payload reported database connected. Unauthenticated `GET /api/operators/audit` returned 401. Vehicle verification positive/negative-path acceptance and audit-feed redaction checks passed using disposable records, which were cleaned up. No temporary acceptance script remains. Production server was stopped after checks. Git remains unavailable on the connected machine, so no repository diff, commit or push could be verified.
+
+
+## PWA automatic update and in-app update control — 24 November 2026
+
+Added a persistent update control across passenger, driver and operator screens. The control lets a user manually check for updates and apply an update that has finished downloading. The PWA also checks on app registration, when the app returns to the foreground, when connectivity returns, and hourly while visible. A downloaded update is staged during an active session to avoid interrupting an in-progress booking or form; it is applied automatically on the next app launch, or immediately when the user selects Update now. The service-worker shell cache version was advanced to v3. Private API and framework assets remain excluded from service-worker caching. Offline state disables update checks while preserving the update control. This update behavior still requires real-device/Pi Browser acceptance after deployment over HTTPS.
+
+
+Update-system verification: `npm run typecheck`, optimized `npm run build` and `npm audit --audit-level=moderate` passed (zero vulnerabilities). The production build served `/` with the persistent `Check for updates` control rendered, served `/sw.js` with cache version `on-the-way-shell-v3`, and served `/manifest.webmanifest` successfully. Browser-level lifecycle testing (actual waiting-worker activation, offline behavior and reload continuity) still requires Pi Browser/device testing against the deployed HTTPS origin.
+
+
+### Google Maps Embed API integration ? implementation status
+
+- [x] Passenger UI embeds Google Maps in-app when a restricted NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is configured.
+- [x] Selected pickup and destination coordinates are passed to the Google Maps Embed directions mode; bike selections request bicycling directions, while car/rickshaw use driving directions.
+- [x] Google Maps satellite imagery mode is available in the same embedded map when the API key is configured.
+- [x] OpenStreetMap remains a location-only fallback when Google Maps is not configured; the fallback is not presented as a verified route.
+- [ ] Configure and validate a restricted Google Maps Embed API key in the deployment environment.
+- [ ] Replace development-only Nominatim geocoding with an approved production geocoding provider and complete coverage/accuracy acceptance.
+- [ ] Verify route coverage and supported transport modes in the selected pilot city.
+
+Satellite imagery is supplied by the Google Maps Embed API satellite map type. It is not a separate Google Earth web application embedded in the page.
