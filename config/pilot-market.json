@@ -1,0 +1,33 @@
+{
+  "marketId": "PK-PB-LHE",
+  "status": "selected_prelaunch",
+  "country": {
+    "name": "Pakistan",
+    "iso3166Alpha2": "PK",
+    "subdivision": "Punjab"
+  },
+  "city": {
+    "name": "Lahore",
+    "slug": "lahore",
+    "ianaTimezone": "Asia/Karachi",
+    "defaultLocale": "en-PK"
+  },
+  "currency": {
+    "iso4217": "PKR",
+    "minorUnitDigits": 2,
+    "usage": "local_reference_pricing_only"
+  },
+  "vehicleTypes": ["car", "bike", "rickshaw"],
+  "piPayments": {
+    "network": "testnet",
+    "enabled": false,
+    "mainnetEnabled": false
+  },
+  "releaseControls": {
+    "bookingEnabled": false,
+    "dispatchEnabled": false,
+    "fareQuotesEnabled": false,
+    "requiresApprovedServiceBoundary": true,
+    "requiresLegalAndInsuranceSignoff": true
+  }
+}

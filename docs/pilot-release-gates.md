@@ -83,3 +83,15 @@ This document separates a working interface preview from a safe, operable mobili
 ## Go / no-go rule
 
 Production remains **NO-GO** while any critical gate above is incomplete or unsupported by evidence. Start with one legally cleared pilot city, a verified driver cohort, controlled Testnet/staging validation and explicit operational sign-off. Mainnet launch requires a separate approval decision; a green frontend build alone is not a production certification.
+
+## Selected pilot market — Lahore, Pakistan
+
+- [x] First pilot market selected: Lahore, Punjab, Pakistan (PK-PB-LHE).
+- [x] Market baseline recorded: Asia/Karachi, PKR local reference currency, and car/bike/rickshaw categories.
+- [ ] Approve Lahore service boundary and provision a validated GeoJSON MultiPolygon; do not activate a zone before sign-off.
+- [ ] Complete Pakistan/Punjab/Lahore legal, transport, insurance, tax, consumer-protection and privacy review.
+- [ ] Approve local fare policy and pricing test vectors; no fare values are active.
+- [ ] Appoint local operations/support owner and verify driver cohort.
+- [ ] Complete routing, Pi Testnet payment, accessibility, security and operational acceptance.
+
+See [Lahore pilot market profile](pilot-market-lahore.md) and config/pilot-market.json. Market selection does not authorize launch; booking, dispatch, fare quotes and payments remain disabled pending their release gates.

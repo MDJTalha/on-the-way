@@ -471,3 +471,10 @@ Satellite imagery is supplied by the Google Maps Embed API satellite map type. I
 - [ ] Complete real Pi Pioneer acceptance, production geocoding, fare quotes, dispatch, trip lifecycle, Pi Testnet payments, operational controls, WCAG 2.2 AA and pilot sign-off.
 
 This checkpoint is local verification evidence, not production certification. Production remains NO-GO.
+
+## Selected pilot market — 24 November 2026
+
+- [x] Select Lahore, Punjab, Pakistan as the first pilot market.
+- [x] Record machine-readable market profile: config/pilot-market.json (PK, PKR reference currency, Asia/Karachi, car/bike/rickshaw).
+- [x] Document local legal, service-boundary, pricing, operations and Testnet acceptance requirements in docs/pilot-market-lahore.md.
+- [ ] Obtain approved service boundary, legal/insurance sign-off, local fare policy and operations owner before enabling any live pilot capability.
