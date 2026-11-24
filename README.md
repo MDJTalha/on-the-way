@@ -1,8 +1,8 @@
 # On the Way
 
-**Move freely. Pay with Pi.**
+**Move freely. Explore your city.**
 
-On the Way is an independent, Pi Browser-first mobility marketplace. The initial service scope is point-to-point passenger transport by car, bike and rickshaw, with a staged path toward city and intercity journeys.
+On the Way is an independent, Pakistan-first mobility platform. Pi identity and payments are optional ecosystem integrations, not assumptions about local customer adoption. The initial service scope is point-to-point passenger transport by car, bike and rickshaw, with a staged path toward city and intercity journeys.
 
 > On the Way is an independent project. It is not affiliated with, endorsed by, or operated by Pi Network.
 
@@ -16,21 +16,23 @@ This repository now contains the responsive Next.js passenger, driver and operat
 | Vehicle category and illustrative fare selection | Implemented |
 | Suggested fare / passenger offer interaction | Preview only |
 | Scheduled ride UI | Preview only; no scheduling API |
-| Pi authentication | Implemented locally; real Pi Browser/Sandbox acceptance pending |
+| Pi authentication | Implemented locally; currently required for passenger booking; real Pi Browser/Sandbox acceptance pending |
+| Local passenger authentication | Not implemented; a non-Pi sign-in method is required before broad Pakistan-market launch |
 | Backend, database and persistent accounts | Initial local API, PostgreSQL schema and signed passenger sessions implemented |
 | Driver onboarding, verification and dispatch | Application persistence implemented; identity verification and dispatch not implemented |
 | Geocoding | Server-side Mapbox adapter implemented; production token and provider acceptance pending |
 | Maps, routes or ETAs | Google Maps Embed API integration is credential-gated; production routing/ETA service not implemented |
-| Pi payments and reconciliation | Not integrated |
-| Operator console and support workflows | Not implemented |
+| PKR/local payment methods | Product direction selected; provider, cash-handling and settlement workflows not integrated or enabled |
+| Pi payments and reconciliation | Optional future integration; not integrated or enabled |
+| Operator console and support workflows | Driver, vehicle and service-zone administration foundation implemented; support, safety and dispute workflows incomplete |
 
 The UI deliberately labels sample fares, map artwork and network status. No driver availability, route, ETA, booking, payment or traction metric should be inferred from this preview.
 
 ## Product workflow
 
-**Passenger:** Pi sign-in → pickup and destination → vehicle category → server-issued fare quote or offer → eligible driver offers → driver confirmation → trip status → Pi payment → receipt and rating.
+**Passenger (target):** local account sign-in or optional Pi sign-in -> pickup and destination -> vehicle category -> server-issued PKR fare quote -> eligible driver offers -> driver confirmation -> trip status -> locally supported payment -> receipt and rating. Pi payment may be offered later as an opt-in method only after demand and Testnet acceptance.
 
-**Driver:** onboarding → identity/licence/vehicle submission → human verification → service-zone and availability setup → accept/reject/counteroffer → pickup and trip lifecycle → payment reconciliation.
+**Driver:** onboarding -> identity/licence/vehicle submission -> human verification -> service-zone and availability setup -> accept/reject/counteroffer -> pickup and trip lifecycle -> local payment settlement.
 
 **Operations:** configure countries, cities, service zones and pricing; verify drivers; monitor bookings and payments; handle support, incidents and disputes; review audit records.
 
@@ -40,7 +42,7 @@ The UI deliberately labels sample fares, map artwork and network status. No driv
 - Backend: Next.js Node.js route handlers for the initial modular monolith; service extraction only when justified.
 - Persistence: PostgreSQL + PostGIS (local development schema and migrations implemented; production operations pending).
 - Realtime and ephemeral presence: Redis + WebSockets (planned).
-- Identity: official Pi SDK and server-side Pi Platform API token verification implemented locally; real Pioneer acceptance pending. Payments: server-side approval/completion not yet implemented.
+- Identity: current preview uses official Pi SDK and server-side Pi Platform API verification; local phone/email authentication is not implemented. Payments: PKR/local methods are the target primary model but no provider is selected or enabled; Pi server-side approval/completion is not implemented.
 - Maps: provider selection and credentials required.
 - Delivery: Docker, CI, staging, observability and verified backups (planned).
 
@@ -71,7 +73,7 @@ Copy `.env.example` to `.env.local` and populate only values for services actual
 
 ## Engineering principles
 
-1. Pi-first integration, using official documented SDK/API flows only.
+1. Local-market-first experience; Pi remains an optional integration, using official documented SDK/API flows only.
 2. Backend is authoritative for identity, pricing, booking state and payment status.
 3. Idempotent booking/payment mutations and auditable state transitions.
 4. No fabricated drivers, availability, trips, ETAs, routes, earnings or growth metrics.
@@ -110,3 +112,6 @@ Place search and reverse geocoding now run through same-origin server routes. Co
 - Configure NEXT_PUBLIC_GOOGLE_MAPS_API_KEY in the deployment environment after enabling the Maps Embed API in Google Cloud. The API requires a valid key and a billing-enabled Cloud project; the Embed API itself is currently documented by Google as no-charge with unlimited requests. Restrict the key to the Maps Embed API and approved HTTP referrers.
 - When the Google key is absent, the UI retains an OpenStreetMap location fallback. The fallback does not provide verified route directions. Do not treat satellite imagery as a separate embedded Google Earth application; Google Maps satellite mode is the supported embedded imagery path.
 - Map route display is a visual directions view only; fare, dispatch, live driver tracking and booking state remain backend-controlled and are not inferred from the map.
+
+
+See [Pakistan payment strategy](docs/payment-strategy-pakistan.md) and `config/payment-policy-pakistan.json`. PKR/local methods are the target primary model; Pi is optional and disabled. The current preview still requires Pi sign-in for passenger booking, and local passenger authentication remains a release blocker.

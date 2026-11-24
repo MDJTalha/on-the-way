@@ -478,3 +478,19 @@ This checkpoint is local verification evidence, not production certification. Pr
 - [x] Record machine-readable market profile: config/pilot-market.json (PK, PKR reference currency, Asia/Karachi, car/bike/rickshaw).
 - [x] Document local legal, service-boundary, pricing, operations and Testnet acceptance requirements in docs/pilot-market-lahore.md.
 - [ ] Obtain approved service boundary, legal/insurance sign-off, local fare policy and operations owner before enabling any live pilot capability.
+
+
+## Pakistan-first payment and identity strategy - 24 November 2026
+
+- [x] Set the product direction: PKR/local payment methods are primary; Pi is optional and not a dependency for market adoption.
+- [x] Add a machine-readable, disabled-by-default Pakistan payment policy; cash and local digital providers remain candidates, not active payment rails.
+- [x] Remove Pi-payment-led hero messaging from the passenger landing page and identify Lahore as the pre-launch market.
+- [x] Document the current identity limitation: passenger booking still requires Pi sign-in; a non-Pi passenger authentication path is required before broad local launch.
+- [ ] Implement secure phone/email passenger authentication and optional Pi account linking.
+- [ ] Define Lahore cash-handling, provider selection, merchant settlement, refund, cancellation and dispute operations.
+- [ ] Implement server-authoritative PKR route/fare quotes and booking/payment linkage.
+- [ ] Integrate a selected local payment provider only after legal/commercial approval; complete reconciliation and exception workflows.
+- [ ] Validate Pi demand before considering optional Testnet payment acceptance.
+
+The payment policy file is configuration documentation only. No payment method, booking, fare quote or dispatch capability is activated by this change.
+- [x] Add a CI-enforced configuration invariant test to keep Lahore/PKR aligned and all payment collection, cash, local digital rails, Pi payments, bookings, dispatch and fare quotes disabled until release approval.

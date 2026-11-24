@@ -1,0 +1,34 @@
+{
+  "marketId": "PK-PB-LHE",
+  "status": "prelaunch_policy_only",
+  "currency": "PKR",
+  "primaryPaymentModel": "locally_supported_methods",
+  "paymentCollectionEnabled": false,
+  "methods": {
+    "cash": {
+      "enabled": false,
+      "status": "candidate_pending_operations_and_legal_approval"
+    },
+    "localDigitalPayments": {
+      "enabled": false,
+      "provider": null,
+      "status": "provider_selection_and_contracting_required"
+    }
+  },
+  "pi": {
+    "role": "optional_future_method",
+    "network": "testnet",
+    "enabled": false,
+    "mainnetEnabled": false,
+    "requiresExplicitOptIn": true,
+    "requiresDemandValidation": true
+  },
+  "controls": {
+    "serverAuthoritativeFareQuoteRequired": true,
+    "bookingPaymentLinkRequired": true,
+    "idempotentSettlementRequired": true,
+    "reconciliationRequired": true,
+    "refundAndDisputePolicyRequired": true,
+    "legalAndProviderApprovalRequired": true
+  }
+}

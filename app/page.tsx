@@ -312,7 +312,7 @@ export default function Home() {
       <section className="hero passenger-hero">
         <div>
           <div className="eyebrow"><span className="eyebrow-line" /> EVERY JOURNEY, MORE CONNECTED</div>
-          <h1>Move freely.<br /><em>Pay with Pi.</em></h1>
+          <h1>Move freely.<br /><em>Explore your city.</em></h1>
           <p className="hero-subtitle">Your city. Your ride. Your choice.</p>
           <div className="hero-trust"><span><b>✓</b> Clear booking status</span><span><b>⌖</b> Location-aware</span><span><b>π</b> Pi identity</span></div>
         </div>
@@ -321,7 +321,7 @@ export default function Home() {
 
       <section className="workspace passenger-workspace">
         <div className="booking-column">
-          <div className="section-heading"><div><span className="step-label">01 / YOUR JOURNEY</span><h2>Where to?</h2></div><span className="market-tag">Pilot market not configured</span></div>
+          <div className="section-heading"><div><span className="step-label">01 / YOUR JOURNEY</span><h2>Where to?</h2></div><span className="market-tag">Lahore - Pre-launch</span></div>
           <form className="booking-card" onSubmit={submitRide}>
             <div className="route-fields">
               <div className="route-rail"><span className="pickup-dot" /><span className="route-stem" /><span className="destination-dot" /></div>
@@ -382,7 +382,7 @@ export default function Home() {
         </aside>
       </section>
 
-      <section className="bottom-strip"><div><span className="strip-icon">01</span><span><strong>Choose your journey</strong><small>Search real locations and choose a vehicle category.</small></span></div><div><span className="strip-icon">02</span><span><strong>Request transparently</strong><small>Know when a request is received and what remains pending.</small></span></div><div><span className="strip-icon">03</span><span><strong>Pi-first identity</strong><small>Authentication is verified by the Pi Platform API.</small></span></div></section>
+      <section className="bottom-strip"><div><span className="strip-icon">01</span><span><strong>Choose your journey</strong><small>Search real locations and choose a vehicle category.</small></span></div><div><span className="strip-icon">02</span><span><strong>Request transparently</strong><small>Know when a request is received and what remains pending.</small></span></div><div><span className="strip-icon">03</span><span><strong>Pi sign-in (preview)</strong><small>Authentication is verified by the Pi Platform API.</small></span></div></section>
       <footer className="footer"><div className="footer-brand"><span className="brand-mark small">O<span>W</span></span> on the way</div><span>Independent project · Not affiliated with or endorsed by Pi Network.</span><span>© 2026 On the Way</span></footer>
     </main>
   );
