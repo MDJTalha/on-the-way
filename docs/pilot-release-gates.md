@@ -108,3 +108,18 @@ See [Lahore pilot market profile](pilot-market-lahore.md) and config/pilot-marke
 - [ ] Obtain written TNC/DPPT and payment-mode clearance before live trips.
 
 See `docs/fairbid-negotiation-communications-safety.md` and migration 010. Schema foundations do not mean these services are operational.
+
+## Fare negotiation, messaging and safety API status — 24 November 2026
+
+- [x] Implement server-side Google Routes quote endpoint for car and two-wheeler requests, fail-closed for rickshaw until routing coverage is certified.
+- [x] Require both endpoints to be inside an active Lahore service-zone polygon; use an active, approved fare-policy version only.
+- [x] Implement passenger PKR bid, assigned-captain counteroffer, both-sided acceptance and immutable fare lock APIs.
+- [x] Implement booking participant chat persistence and read APIs.
+- [x] Implement driver GPS ingestion and passenger live-location read API; only active assigned trips are eligible.
+- [x] Implement SOS/safety incident reporting and incident audit foundation.
+- [x] Add dispatch-offer, dispatch-event and safety-event database schema foundations (migration 011).
+- [ ] Implement dispatch engine and captain assignment; no booking can be automatically matched yet.
+- [ ] Add incident operator console and realtime push/messaging delivery.
+- [ ] Complete provider, retention, privacy and security acceptance.
+
+API presence does not mean the Lahore marketplace is operational. Routing is disabled without a server key, quote creation requires an approved active boundary and fare policy, captain actions require an existing assignment, and trip tracking requires an active trip. Production remains NO-GO.

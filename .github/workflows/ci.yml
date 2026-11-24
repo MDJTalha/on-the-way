@@ -48,6 +48,8 @@ jobs:
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/008_vehicle_onboarding_review.sql
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/009_service_zone_administration.sql
           psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/010_negotiation_communications_safety.sql
+          psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/011_dispatch_safety_audit.sql
+          psql -h localhost -U otw_ci -d on_the_way_ci -v ON_ERROR_STOP=1 -f database/migrations/012_driver_presence_and_lifecycle.sql
       - run: npm run typecheck
       - run: npm run build
       - name: Start production server and run smoke tests

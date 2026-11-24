@@ -511,3 +511,32 @@ The payment policy file is configuration documentation only. No payment method, 
 - [ ] Complete Lahore legal, driver, safety and operational certification.
 
 See [FairBid negotiation, communications and safety architecture](fairbid-negotiation-communications-safety.md). This is not a live fare/ride service; no fare policies are seeded and no dispatch, contact, tracking or payment provider is enabled.
+
+## FairBid API and active-trip foundations — 24 November 2026
+
+- [x] Add passenger-only route quote endpoint using Google Routes server API, PostGIS approved-zone containment and approved active Lahore fare policies. No client-supplied route distance or fare is trusted.
+- [x] Add passenger bid creation with quote expiry, PKR bounds, idempotency and offer history.
+- [x] Add assigned-captain counteroffer and passenger acceptance endpoints; captain acceptance of passenger bid is separately authorized.
+- [x] Lock the accepted amount and create the booking conversation in the same database transaction.
+- [x] Add booking-scoped message read/write APIs with participant checks and idempotent message IDs.
+- [x] Add driver-only GPS update endpoint and passenger-only latest-location endpoint, with accuracy/freshness checks and a basic ingestion throttle.
+- [x] Add active-trip safety incident/SOS reporting endpoint and append-only incident event record.
+- [x] Add migration 011 for dispatch invitations, one-active-trip-per-driver constraint, dispatch event history and safety incident event history; add to CI migration sequence.
+- [ ] Implement automatic geospatial driver candidate search, route-matrix ETA ranking, staged dispatch fan-out, timeout/decline recovery and atomic captain assignment.
+- [ ] Implement operator safety incident queue, acknowledgement and escalation workflow.
+- [ ] Add realtime message/booking event delivery and push notification provider.
+- [ ] Add masked calling and provider verification for Pakistan +92 coverage.
+- [ ] Add location retention/purge, trip share links and route deviation detection.
+- [ ] Add automated concurrency, authorization and end-to-end tests for all new endpoints.
+
+All provider-backed functions remain gated: Google Routes needs a server-side key; fare quotes additionally require an approved Lahore boundary and an active approved fare policy. No route key, boundary, fare policy or payment method is activated by these changes. Driver counteroffers and GPS updates require a captain already assigned by a future dispatch workflow. SOS records an incident but does not contact emergency services; the app directs users to call 15/1122 themselves.
+
+## Dispatch and presence foundations — 24 November 2026
+
+- [x] Add expiring online-captain presence with location accuracy and short TTL; presence is accepted only for verified, available drivers.
+- [x] Clear stored presence when a captain goes offline.
+- [x] Add dispatch invitation table with staged rounds, per-captain expiry, pickup distance/ETA fields and a single accepted invitation per booking.
+- [x] Add one-active-trip-per-captain database constraint and append-only dispatch event schema.
+- [x] Add smoke-test authentication coverage for new fare, chat, tracking, safety, presence and operator incident endpoints.
+- [ ] Implement route-matrix based matching and automated dispatch orchestration.
+- [ ] Add scheduled expiry/purge workers for presence and dispatch invitations.
